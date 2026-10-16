@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Farhann! 🤍</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Library untuk efek konfeti/kembang api -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Efek Hati Melayang -->
+    <div class="floating-hearts" id="floating-hearts"></div>
+
+    <!-- Audio Musik -->
+    <audio id="bg-music" loop>
+        <source src="musik.mp4" type="audio/mp4">
+    </audio>
+    <button id="music-btn" onclick="toggleMusic()">🎵 Putar Musik</button>
+
+    <div class="container">
+        
+        <!-- PAGE 1: PASSCODE -->
+        <div id="page-1" class="section section-active">
+            <div class="gift-container">
+                <!-- Diubah dari <img> ke <video> karena gif4.mp4 adalah video -->
+                <video src="gif4.mp4" autoplay loop muted playsinline style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 10px;"></video>
+            </div>
+            <h2>Allowwww Gantengg!😋</h2>
+            <p class="sub-text">Coba tebak password buat masuk dulu yaa~</p>
+            
+            <div class="dots-container">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div class="keypad">
+                <button onclick="pressNum('1')">1</button>
+                <button onclick="pressNum('2')">2</button>
+                <button onclick="pressNum('3')">3</button>
+                <button onclick="pressNum('4')">4</button>
+                <button onclick="pressNum('5')">5</button>
+                <button onclick="pressNum('6')">6</button>
+                <button onclick="pressNum('7')">7</button>
+                <button onclick="pressNum('8')">8</button>
+                <button onclick="pressNum('9')">9</button>
+                <button onclick="pressNum('0')">0</button>
+                <button onclick="deleteNum()" class="btn-del">⌫</button>
+            </div>
+            <p class="clue-text">Clue : Tanggal ultah kamu (DDMMYY)</p>
+        </div>
+
+        <!-- PAGE 2: INTERAKSI KUIS LUCU -->
+        <div id="page-2" class="section">
+            <div class="gift-container">
+                <video src="gif7.mp4" autoplay loop muted playsinline style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 10px;"></video>
+            </div>
+            <h2>Pertanyaan Singkat Dulu‼</h2>
+            <p class="sub-text">Seberapa kangen kamu sama aku selama ini?</p>
+            
+            <div class="quiz-buttons">
+                <button class="btn-quiz" onclick="triggerLoveConfetti()">Kangen Bangeeeeet! (╹ڡ╹ )</button>
+                <!-- Tombol ini HANYA akan kabur pas mau diklik/ditekan -->
+                <button class="btn-quiz" id="btn-no" onclick="moveNoButton()">Biasa Aja (´。＿。｀)</button> 
+            </div>
+        </div>
+
+        <!-- PAGE 3: MINI GAME KADO MISTERI -->
+        <div id="page-3" class="section">
+            <h2>Pilih Kado Kamu! 🎁</h2>
+            <p class="sub-text">Pilih salah satu kotak hadiah di bawah ini yaa:</p>
+            
+            <div class="gift-boxes">
+                <div class="box" onclick="openGift(1)">📦 <p>Hadiah 1</p></div>
+                <div class="box" onclick="openGift(2)">📦 <p>Hadiah 2</p></div>
+                <div class="box" onclick="openGift(3)">📦 <p>Hadiah 3</p></div>
+            </div>
+
+            <!-- Modal Pop up Kado -->
+            <div id="gift-modal" class="modal hidden">
+                <div class="modal-content">
+                    <!-- Jika di dalam modal juga mau pakai MP4, ubah id & elemennya jadi video -->
+                    <video id="gift-video" autoplay loop muted playsinline style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 10px; border-radius: 10px;"></video>
+                    <p id="gift-text"></p>
+                    <button class="btn-next" onclick="nextPage('page-4')">Lanjut ke Surprise Utama ✨</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 4: GALERI & KATA-KATA ROMANTIS -->
+        <div id="page-4" class="section">
+            <h2>Happy Birthday Gantengg! 🎉✨</h2>
+            
+            <div class="photo-grid">
+                <img src="han.jpeg" alt="Foto 1">
+                <img src="han1.jpeg" alt="Foto 2">
+            </div>
+
+            <div class="message-card">
+                <p>
+                    <strong>Happy birthday, Hann! 🎂🥳</strong><br><br>
+                     Honestly, time flies so fast, tapi aku bener-bener seneng liat kamu makin dewasa dan bahagia dengan jalan yang kamu pilih sekarang. 
+                    Walau cerita kita udah usai dan punya arah masing-masing, you’ll always hold a special place in my heart sebagai orang yang pernah sangat berharga. <br><br> Thank you for every single memory, every laugh, and all the lessons we shared.
+                    Di usiamu yang baru ini, dari hati yang paling tulus, aku selalu doain yang terbaik buat kamu. Semoga hidup kamu selalu tenang, dikelilingi orang-orang yang tulus sayang sama kamu, and I hope life gives you all the happiness you truly deserve. 
+                    Sehat-sehat terus ya. Enjoy your special day!
+                </p>
+            </div>
+
+            <button class="btn-next" onclick="nextPage('page-5')">Ada Pesan Terakhir 👀</button>
+        </div>
+
+        <!-- PAGE 5: SERTIFIKAT / BADGE LUCU -->
+        <div id="page-5" class="section">
+            <div class="gift-container">
+                <video src="gif5.mp4" autoplay loop muted playsinline style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 10px;"></video>
+            </div>
+            <h2>Sertifikat Spesial 🏆</h2>
+            <p class="sub-text">Karena udah bertahan baca sampai halaman paling akhir:</p>
+            
+            <div class="certificate-card">
+                <h3>⭐ CERTIFICATE OF EX-CELLENCE ⭐</h3>
+                <p>Diberikan dengan penuh rasa hormat kepada:</p>
+                <p class="cert-name"><strong>Farhann Al Zaidi 🤍</strong></p>
+                <p class="cert-desc">atas prestasinya sebagai mantan yang:
+Hobi ngejek dan jahil, tapi selalu tahu cara bikin ngerasa diperhatikan lewat pujiannya. Makasih buat semuanya, tetap jadi orang hebat ya!</p>
+            </div>
+
+            <button class="btn-next" onclick="triggerPartyConfetti(); nextPage('page-6')">Klaim Hadiah & Balas WA ✨</button>
+        </div>
+        <!-- PAGE 6: REAKSI dan BALAS VIA WHATSAPP -->
+            <div id="page-6" class="section">
+                <div class="gift-container">
+                    <video src="gif6.mp4" autoplay loop muted playsinline style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 10px;"></video>
+                </div>
+                <h2>Makasih Udah Buka Sampai Akhir! 💕</h2>
+                <p class="sub-text">Gimana web nya? Jangan lupa kirim pelukan &amp; balesan ucapan yaa~</p>
+                
+                <!-- Link WhatsApp dengan teks otomatis yang sudah di-encode agar aman dari eror -->
+                <a href="https://wa.me" target="_blank" class="btn-wa">
+                    💬 Balas ke WhatsApp Aku
+                </a>
+                
+                <br>
+                <button class="btn-reset" onclick="nextPage('page-1')">⟳ Ulang Lagi dari Awal</button>
+            </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
